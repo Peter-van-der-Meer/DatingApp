@@ -16,6 +16,7 @@ using Microsoft.OpenApi.Models;
 
 namespace API {
     public class Startup {
+
         public IConfiguration _config { get; }
 
         public Startup(IConfiguration config) {
@@ -26,13 +27,14 @@ namespace API {
         public void ConfigureServices(IServiceCollection services) {
 
             services.AddDbContext<DataContext>(options => {
-                options.UseSqlite (_config.GetConnectionString("DefaultConnection"));
+                options.UseSqlite(_config.GetConnectionString("DefaultConnection"));
 
             });
             services.AddControllers();
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
             });
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +48,8 @@ namespace API {
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
 
             app.UseAuthorization();
 
