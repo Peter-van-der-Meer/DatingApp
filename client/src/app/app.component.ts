@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.getUsers();    
-    this.dummy = "peter";
+    this.dummy = "Peter";
   }
 
   getUsers() {
