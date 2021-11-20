@@ -31,8 +31,8 @@ export class AccountService {
   register(model: any) {
     return this.http.post(this.baseUrl + 'account/register', model).pipe(
       map((user: any) => {
-      /* ToDo onderstaande */
-      //map((user: User) => {
+        /* ToDo onderstaande */
+        //map((user: User) => {
         if (user) {
           localStorage.setItem('user', JSON.stringify(user));
           this.currentUserSource.next(user);
@@ -41,7 +41,8 @@ export class AccountService {
     )
   }
 
-  setCurrentUser(user: User) {
+  // setCurrentUser(user: User) {
+  setCurrentUser(user: any) {
     this.currentUserSource.next(user);
   }
 
